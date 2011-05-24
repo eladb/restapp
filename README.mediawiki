@@ -5,7 +5,7 @@ restapp is a small framework (hate that word...) for creating REST web services 
 We will create a books service. The API of the service will be as follows:
 
 ''GET /books'' will return all the books in the repository
-''GET /books/<isbn>'' - will return a specific book by ISBN
+''GET /books/isbn'' - will return a specific book by ISBN
 ''POST /books'' - will create a new book via HTTP POST
 
 In order to create a REST endpoint, you will need to subclass restapp.Endpoint and override one of the methods: get, query, post.
