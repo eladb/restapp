@@ -11,7 +11,7 @@ We will create a books service. The API of the service will be as follows:
 In order to create a REST endpoint, you will need to subclass restapp.Endpoint and override one of the methods: get, query, post.
 
 Example:
-
+ <nowiki>
   from google.appengine.ext import db
   import restapp
 
@@ -56,3 +56,4 @@ Example:
     
   if __name__ == "__main__":
     main()
+</nowiki>
