@@ -1,4 +1,5 @@
-restapp is a small framework (hate that word...) for creating REST web services on top of google appengine.
+'restapp' is a small framework (hate that word...) for creating REST web services on top of google appengine.
+It runs on top of the GAE webapp framework.
 
 == Tutorial ==
 
@@ -8,14 +9,35 @@ We will create a books service. The API of the service will be as follows:
 ''GET /books/isbn'' - will return a specific book by ISBN
 ''POST /books'' - will create a new book via HTTP POST
 
-In order to create a REST endpoint, you will need to subclass restapp.Endpoint and override one of the methods: get, query, post.
+Start with a simple app.yaml which maps the /books(.*)? pattern to our handler.
 
-Example:
  <nowiki>
-  from google.appengine.ext import db
-  import restapp
+- url: /books(/.*)?
+  script: books.py
+</nowiki>
 
-  class Book(db.Model):
+
+The minimum implementation will consist of defining an endpoint and running it in __main__:
+
+ <nowiki>
+import restapp
+
+class BooksEndpoint(restapp.Endpoint):
+    root_url = "/books"
+
+def main():
+    restapp.run_wsgi_restapp(BooksEndpoint)
+    
+if __name__ == "__main__":
+    main()
+</nowiki>
+
+First, let's define the storage model for books:
+
+ <nowiki>
+from google.appengine.ext import db
+
+class Book(db.Model):
     title = db.StringProperty()
     author = db.StringProperty()
     publish_year = db.IntegerProperty()
@@ -23,7 +45,16 @@ Example:
     
     @property
     def isbn(self):
-      return self.key().name()
+        return self.key().name()
+</nowiki>
+
+
+
+In order to create a REST endpoint, you will need to subclass restapp.Endpoint and override one of the methods: get, query, post.
+
+Example:
+ <nowiki>
+import restapp
 
   class BooksEndpoint(restapp.Endpoint):
     root_url = "/books"
