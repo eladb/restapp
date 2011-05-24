@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>{{ title }}</title>
+	</head>
+	
+	<table>
+		<tr>
+			<td>ISBN</td>
+			<td><a href='/books/{{ isbn }}?alt=json'>{{ isbn }}</a></td>
+		</tr>
+		<tr>
+			<td>Title</td>
+			<td>{{ title }}</td>
+		</tr>
+		<tr>
+			<td>Author</td>
+			<td>{{ author }}</td>
+		</tr>
+		<tr>
+			<td>Year</td>
+			<td>{{ publish_year }}</td>
+		</tr>
+		<tr>
+			<td>Last update</td>
+			<td>{{ last_update }}</td>
+		</tr>
+	</table>
+</html>

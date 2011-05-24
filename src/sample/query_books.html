@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>Query Friends</title>
+	</head>
+	<body>
+		<table border='1'>
+			<tr>
+				<th>ISBN</th>
+				<th>Title</th>
+				<th>Author</th>
+				<th>Year</th>
+				<th>Last update</th>
+			</tr>
+			
+			{% for b in results %}
+			<tr>
+				<td><a href='/books/{{ b.isbn }}'>{{ b.isbn }}</a></td>
+				<td>{{ b.title }}</td>
+				<td>{{ b.author }}</td>
+				<td>{{ b.publish_year }}</td>
+				<td>{{ b.last_update }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+		
+		<h4>New Book</h4>
+		<form method="post">
+			<table>
+				<tr>
+					<td>ISBN:</td>
+					<td><input type='text' name='isbn'></input></td>
+				</tr>
+				<tr>
+					<td>Title:</td>
+					<td><input type='text' name='title'></input></td>
+				</tr>
+				<tr>
+					<td>Author:</td>
+					<td><input type='text' name='author'></input></td>
+				</tr>
+				<tr>
+					<td>Published:</td>
+					<td><input type='text' name='publish_year'></input></td>
+				</tr>
+			</table>
+			<input type='submit'></input>
+		</form>
+	</body>
+</html>

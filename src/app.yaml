@@ -1,0 +1,11 @@
+application: restappsample
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /books(/.*)?
+  script: sample/__init__.py
+
+builtins:
+- datastore_admin: on
