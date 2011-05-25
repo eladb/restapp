@@ -1,2 +1,2 @@
-See [[https://github.com/eladb/restapp/wiki]]
+See https://github.com/eladb/restapp/wiki
 
