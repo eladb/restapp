@@ -11,16 +11,14 @@ We will create a books service. The API of the service will be as follows:
 
 Start with a simple app.yaml which maps the /books(.*)? pattern to our handler.
 
- <nowiki>
-- url: /books(/.*)?
+ <nowiki>- url: /books(/.*)?
   script: books.py
 </nowiki>
 
 
 The minimum implementation will consist of defining an endpoint and running it in __main__:
 
- <nowiki>
-import restapp
+ <nowiki>import restapp
 
 class BooksEndpoint(restapp.Endpoint):
     root_url = "/books"
@@ -32,10 +30,9 @@ if __name__ == "__main__":
     main()
 </nowiki>
 
-First, let's define the storage model for books:
+Storage model:
 
- <nowiki>
-from google.appengine.ext import db
+ <nowiki>from google.appengine.ext import db
 
 class Book(db.Model):
     title = db.StringProperty()
@@ -48,13 +45,10 @@ class Book(db.Model):
         return self.key().name()
 </nowiki>
 
+TODO: still work to do on the tutorial...
 
-
-In order to create a REST endpoint, you will need to subclass restapp.Endpoint and override one of the methods: get, query, post.
-
-Example:
- <nowiki>
-import restapp
+Full sample:
+ <nowiki>import restapp
 
   class BooksEndpoint(restapp.Endpoint):
     root_url = "/books"
