@@ -12,14 +12,11 @@ We will create a books service. The API of the service will be as follows:
 Start with a simple app.yaml which maps the /books(.*)? pattern to our handler.
 
  <nowiki>- url: /books(/.*)?
-  script: books.py
-</nowiki>
-
+  script: books.py</nowiki>
 
 The minimum implementation will consist of defining an endpoint and running it in __main__:
 
  <nowiki>import restapp
-
 class BooksEndpoint(restapp.Endpoint):
     root_url = "/books"
 
@@ -27,13 +24,11 @@ def main():
     restapp.run_wsgi_restapp(BooksEndpoint)
     
 if __name__ == "__main__":
-    main()
-</nowiki>
+    main()</nowiki>
 
 Storage model:
 
  <nowiki>from google.appengine.ext import db
-
 class Book(db.Model):
     title = db.StringProperty()
     author = db.StringProperty()
@@ -42,8 +37,7 @@ class Book(db.Model):
     
     @property
     def isbn(self):
-        return self.key().name()
-</nowiki>
+        return self.key().name()</nowiki>
 
 TODO: still work to do on the tutorial...
 
@@ -80,5 +74,4 @@ Full sample:
     restapp.run_wsgi_restapp(BooksEndpoint)
     
   if __name__ == "__main__":
-    main()
-</nowiki>
+    main()</nowiki>
