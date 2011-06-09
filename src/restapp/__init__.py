@@ -87,6 +87,21 @@ class Endpoint(object):
         ctx.response.headers['Content-Type'] = "application/json"
         ctx.response.out.write(json.dumps(obj, indent=4, sort_keys=True))
 
+    def alt_jsonp(self, ctx, obj):
+        """Emits a JSONP representation of the response dictionary
+        Args:
+            ctx - The request context
+            obj - The object or tuple returned by a GET handler"""
+            
+        # make sure we have a 'callback' argument in the request
+        callback_name = ctx.require('callback')
+        if isinstance(obj, tuple):
+            obj = obj[0]
+
+        ctx.response.headers['Content-Type'] = "application/javascript"
+        output = '%s(%s)' % (callback_name, json.dumps(obj, indent=4, sort_keys=True))
+        ctx.response.out.write(output)
+
     def alt_query_html(self, ctx, list):
         """Creates an HTML representation for a query GET operation
         Args:
@@ -102,6 +117,14 @@ class Endpoint(object):
             list - The list of objects returned from the query method
         """
         self.alt_json(ctx, list)
+    
+    def alt_query_jsonp(self, ctx, list):
+        """Creates a JSONP representation of a query GET operation
+        Args:
+            ctx - The request context.
+            list - The list of objects returned from the query method
+        """
+        self.alt_jsonp(ctx, list)
     
     def alt_html(self, ctx, obj):
         """Creates an HTML representation of a response object.
