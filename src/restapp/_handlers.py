@@ -110,7 +110,7 @@ class RequestHandler(RequestHandlerBase, blobstore_handlers.BlobstoreDownloadHan
                     response_obj = self.endpoint.query(ctx)
                     alt_method_prefix = 'alt_query_'
                 except NotImplementedError:
-                    raise errors.BadRequestError('GET is not supported for this endpoint')
+                    raise errors.BadRequestError('QUERY (GET without a path) is not supported for this endpoint')
             else: # single entity
                 try:
                     response_obj = self.endpoint.get(ctx)
